@@ -1,0 +1,36 @@
+# === Secrets / env (never commit real values) ===
+.env
+.env.*
+!.env.example
+secrets/
+
+# === Local runtime data: brain DB, logs, models, build artifacts, certs ===
+data/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.log
+
+# === Local working notes (machine state, private context): never published ===
+CLAUDE.md.backup*
+SESSION_STATUS_*.md
+HYGIENE_PLAN_*.md
+.claude/settings.local.json
+
+# === Python / tooling ===
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+.DS_Store
+
+# Release hygiene
+CLAUDE.md
+.leakgate-private/
+*.zip
+
+# Packaging artefacts
+build/
+dist/
+*.egg-info/

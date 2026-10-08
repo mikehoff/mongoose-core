@@ -1,0 +1,20 @@
+To: {{recipient_email}}
+Subject: Service charge demand. Flat {{flat_number}}, {{road}}, payment now due
+
+Dear {{greeting_name}},
+
+Your service charge demand for the half-year ending {{period_end}} is attached and is now due for payment.
+
+The amount due is {{amount_due}}, payable by {{due_date}} by bank transfer to {{bank_account_name}}, {{bank_name}}, sort code {{bank_sort_code}}, account {{bank_account_number}}, using payment reference {{payment_ref}} so the payment can be allocated correctly.
+
+The demand was also posted to you. Let us know if you've not received it, and let us know what your preference is (printed, email, or both). If your payment has crossed with this email, thank you, and a receipt will follow shortly.
+
+Any questions, just reply to this email or call {{tel}}.
+
+Best regards,
+
+{{sign_name}}
+
+{{director}}
+{{director_title}}, {{company}}
+Tel {{tel}} · info@example-court.org
