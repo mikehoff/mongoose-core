@@ -1185,6 +1185,15 @@ def flat_statement(flat: str) -> dict[str, Any]:
             "entries": entries}
 
 
+def agent_cc_for_editing(flat: dict[str, Any]) -> str:
+    """The managing agent's copy address EXACTLY as stored, for the contact-details editor only.
+
+    An editor must show and save the raw field. Anything that SENDS mail must use correspondence_cc(),
+    which merges the agent with the leaseholder's spare addresses; saving that merged list back into this
+    field would corrupt it. Both readers live here, next to the column, so no other module reads it."""
+    return str((flat or {}).get("demand_cc") or "")
+
+
 def correspondence_cc(flat_id: str) -> list[str]:
     """Who else is copied on ANY correspondence to this flat. THE single answer to that question.
 

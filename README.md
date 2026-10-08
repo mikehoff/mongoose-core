@@ -80,13 +80,8 @@ Measured in a fresh virtual environment with core alone installed:
 
 | Install | Passed | Skipped | Failed |
 |---|---|---|---|
-| `[test]` | 393 | 5 (Word and PDF document tests need the `content` / `rtm_docs` extras) | 1 |
-| all extras | 397 | 1 (the RTM knowledge base is not installed in a fresh setup) | 1 |
-
-The one failure is a known open item, not a regression: `test_no_subsystem_reads_the_cc_column_directly`
-enforces that every reader of a managing agent's copy address goes through `correspondence_cc()`, and the
-portal's contact editor still reads the `demand_cc` column directly to show it for editing. Whether the
-editor changes or the rule gets an exception for editing is an open design decision.
+| `[test]` | 394 | 5 (Word and PDF document tests need the `content` / `rtm_docs` extras) | 0 |
+| all extras | 398 | 1 (the RTM knowledge base is not installed in a fresh setup) | 0 |
 
 RTM journey tests that drive the full assistant app live in mongoose-assistant.
 

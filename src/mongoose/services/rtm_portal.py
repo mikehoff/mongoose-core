@@ -991,6 +991,7 @@ def _flat_label(flat: dict[str, Any]) -> str:
 
 def _safe_flat_row(flat: dict[str, Any], *, include_statement: bool = False) -> dict[str, Any]:
     """Strip director-only and excluded fields from a flat row for the portal snapshot."""
+    from .rtm_management import agent_cc_for_editing as _agent_cc_for_editing
     row: dict[str, Any] = {
         "flat_id": flat.get("flat_id"),
         "block": flat.get("block"),
@@ -1041,7 +1042,7 @@ def _safe_flat_row(flat: dict[str, Any], *, include_statement: bool = False) -> 
         "leaseholder_email": row.get("leaseholder_email", "") or (flat.get("leaseholder_email", "") or ""),
         "leaseholder_email_alt1": flat.get("leaseholder_email_alt1", "") or "",
         "leaseholder_email_alt2": flat.get("leaseholder_email_alt2", "") or "",
-        "demand_cc": flat.get("demand_cc", "") or "",
+        "demand_cc": _agent_cc_for_editing(flat),  # raw stored value for the editor; sending uses correspondence_cc()
         "payment_reference": flat.get("payment_reference", "") or "",
         "correspondence_address": flat.get("correspondence_address", "") or "",
         "correspondence_address_alt1": flat.get("correspondence_address_alt1", "") or "",
