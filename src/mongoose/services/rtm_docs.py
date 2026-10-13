@@ -214,6 +214,16 @@ def canonical_flat(raw: str | None) -> str | None:
     return f"{m2.group(1)}F{m2.group(2)}" if m2 else None
 
 
+def _director_surname() -> str:
+    """The RTM director's surname, upper case, from the company block of property.json; '' when unknown."""
+    try:
+        from .rtm_example_court import load_property
+        words = re.findall(r"[A-Z][A-Z'-]+", str((load_property().get("company") or {}).get("director") or "").upper())
+    except Exception:
+        return ""
+    return words[-1] if words else ""
+
+
 def _rtm_record_links(doc_id: int, flat_id: str | None, text: str, filename: str) -> list[dict[str, Any]]:
     """Correlate a document with the LIVE Example Court records (flats + demands), not just voicemails
     and emails. Matches by canonical flat id, by a flat's payment reference (surname) appearing in the
@@ -236,8 +246,15 @@ def _rtm_record_links(doc_id: int, flat_id: str | None, text: str, filename: str
         flats = M.list_flats() or []
     except Exception:
         flats = []
+    director = _director_surname()
     for f in flats:
         pr = (f.get("payment_reference") or "").upper()
+        # The director's name is on nearly every RTM business document (the customer on supplier invoices,
+        # the signatory on letters), so a reference that is the director's surname identifies nothing. Live,
+        # it tied 29 supplier documents to the director's own flat. An explicit flat id or demand number in
+        # the document still links that flat.
+        if director and director in re.findall(r"[A-Z][A-Z'-]+", pr):
+            continue
         if pr and len(pr) >= 4 and pr in blob:
             if f.get("flat_id"):
                 flats_hit.add(f["flat_id"])
