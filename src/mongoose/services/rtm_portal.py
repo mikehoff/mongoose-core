@@ -563,6 +563,57 @@ def send_payment_plan_letter(flat_id: str, *, erratum: str = "", confirm: bool =
             "error": res.get("error")}
 
 
+LETTER_COVER_HTML = ("<p style=\"margin:0 0 14px\">Please find important communication attached from your management "
+                     "company.</p><p style=\"margin:0\">Director, Example Court RTM</p>")
+
+
+def send_attached_letter(flat_id: str, pdf_path: str, *, subject: str, document_number: str,
+                         attachment_name: str = "", body_html: str = LETTER_COVER_HTML, test: bool = False,
+                         confirm: bool = False) -> dict[str, Any]:
+    """Email a leaseholder a letter as a PDF attachment through the portal (info@example.org, SMTP,
+    audit Bcc, Sent mail log). The PDF goes into the flat-gated store first, then /portal/send-letter
+    attaches it by key AND flat, so it can only ever reach the flat it was written for.
+
+    test=True sends only to the RTM's own address, copying nobody. A real send is CONFIRM-GATED: nothing
+    reaches a leaseholder unless confirm=True, which should follow a human reading the test."""
+    import base64 as _b64
+    import hashlib
+    import secrets
+    flat_id = (flat_id or "").strip().upper()
+    path = Path(pdf_path).expanduser()
+    if not flat_id or not path.exists():
+        return {"ok": False, "error": f"need a flat and an existing PDF ({path})"}
+    raw = path.read_bytes()
+    if raw[:4] != b"%PDF":
+        return {"ok": False, "error": "not a PDF"}
+    if not test and not confirm:
+        return {"ok": False, "sent": False, "reason": "confirm_required", "flat_id": flat_id,
+                "note": "Real sends need confirm=True after the test has been read."}
+    pdf_key = "letter-" + secrets.token_urlsafe(18)
+    push = _wp_call("POST", "/wp-json/example-court/v1/sync/demand-pdf", json_body={
+        "pdf_key": pdf_key, "document_number": document_number, "flat_id": flat_id,
+        "content_b64": _b64.b64encode(raw).decode("ascii"), "sha256": hashlib.sha256(raw).hexdigest()}, timeout=60.0)
+    if not push.get("ok"):
+        return {"ok": False, "error": f"could not store the letter in the portal: {push.get('error')}", "flat_id": flat_id}
+    try:
+        from .rtm_management import correspondence_cc
+        cc = [] if test else correspondence_cc(flat_id)
+    except Exception:
+        cc = []
+    body = {"flat_id": flat_id, "subject": subject, "body_html": body_html, "pdf_key": pdf_key,
+            "attachment_name": attachment_name or path.name, "signoff": False, "test": bool(test),
+            "cc": ", ".join(cc)}
+    res = _wp_call("POST", "/wp-json/example-court/v1/portal/send-letter", json_body=body, timeout=90.0)
+    _record_sync_run("send_attached_letter" + ("_test" if test else ""), bool(res.get("ok")),
+                     res.get("error") or f"{flat_id} {document_number} -> {res.get('email', '')}")
+    if res.get("ok") and not test and not res.get("attached"):
+        # An old plugin ignores pdf_key and sends the cover note alone: never report that as a letter sent.
+        return {"ok": False, "error": "the portal sent the email WITHOUT the attachment (plugin older than 1.1.14)",
+                "flat_id": flat_id, "email": res.get("email")}
+    return {"ok": bool(res.get("ok")), "sent": bool(res.get("ok")), "test": bool(test), "flat_id": flat_id,
+            "email": res.get("email"), "attached": res.get("attached"), "cc": cc, "error": res.get("error")}
+
+
 def _sign_body(content: bytes) -> str:
     """Detached Ed25519 signature over the request body, base64. '' if no key/nacl (then HMAC still applies)."""
     nsign = _nacl_signing()
