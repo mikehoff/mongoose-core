@@ -563,7 +563,8 @@ def send_payment_plan_letter(flat_id: str, *, erratum: str = "", confirm: bool =
             "error": res.get("error")}
 
 
-LETTER_COVER_HTML = ("<p style=\"margin:0 0 14px\">Please find important communication attached from your management "
+LETTER_COVER_HTML = ("<p style=\"margin:0 0 14px\">Good morning,</p>"
+                     "<p style=\"margin:0 0 14px\">Please find important communication attached from your management "
                      "company.</p><p style=\"margin:0\">Director, Example Court RTM</p>")
 
 
@@ -604,14 +605,16 @@ def send_attached_letter(flat_id: str, pdf_path: str, *, subject: str, document_
             "attachment_name": attachment_name or path.name, "signoff": False, "test": bool(test),
             "cc": ", ".join(cc)}
     res = _wp_call("POST", "/wp-json/example-court/v1/portal/send-letter", json_body=body, timeout=90.0)
+    # _wp_call wraps WordPress's reply in "data"; the send facts (recipient, attachment count) live there.
+    d = res.get("data") if isinstance(res.get("data"), dict) else {}
     _record_sync_run("send_attached_letter" + ("_test" if test else ""), bool(res.get("ok")),
-                     res.get("error") or f"{flat_id} {document_number} -> {res.get('email', '')}")
-    if res.get("ok") and not test and not res.get("attached"):
+                     res.get("error") or f"{flat_id} {document_number} -> {d.get('email', '')} attached={d.get('attached')}")
+    if res.get("ok") and not d.get("attached"):
         # An old plugin ignores pdf_key and sends the cover note alone: never report that as a letter sent.
         return {"ok": False, "error": "the portal sent the email WITHOUT the attachment (plugin older than 1.1.14)",
-                "flat_id": flat_id, "email": res.get("email")}
+                "flat_id": flat_id, "email": d.get("email")}
     return {"ok": bool(res.get("ok")), "sent": bool(res.get("ok")), "test": bool(test), "flat_id": flat_id,
-            "email": res.get("email"), "attached": res.get("attached"), "cc": cc, "error": res.get("error")}
+            "email": d.get("email"), "attached": d.get("attached"), "cc": cc, "error": res.get("error")}
 
 
 def _sign_body(content: bytes) -> str:
