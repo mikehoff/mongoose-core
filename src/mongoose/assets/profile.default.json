@@ -1,0 +1,28 @@
+{
+  "profile_version": 1,
+  "owner": {"name": "Alex", "id": "owner", "whatsapp_session": "owner"},
+  "site": {
+    "domain": "example-court.org",
+    "public_url": "https://guest.example-court.org",
+    "rtm_email": "info@example-court.org",
+    "home_lat": 51.5074,
+    "home_lon": -0.1278
+  },
+  "rtm": {
+    "name": "Example Court",
+    "slug": "example-court",
+    "company_number": "01234567",
+    "payment_ref_prefix": "EC",
+    "blocks": [
+      {"code": "1EC", "number": "1", "street": "Example Court", "aliases": ["1 Example Road", "1EXAMPLEROAD"]},
+      {"code": "3EC", "number": "3", "street": "Example Court", "aliases": ["3 Example Road", "3EXAMPLEROAD"]}
+    ]
+  },
+  "wordpress": {"namespace": "example-court/v1", "plugin_slug": "example-court-rtm"},
+  "voicemail": {
+    "sender": "voicemail@voip.example",
+    "provider_token": "voip_provider",
+    "ha_share_dir": "/share/example_court/voicemails"
+  },
+  "lexicons": {}
+}

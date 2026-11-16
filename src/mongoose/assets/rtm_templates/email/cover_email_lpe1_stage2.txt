@@ -1,0 +1,11 @@
+To: {{recipient_email}}
+Subject: {{property_short}}: Form LPE1. Your ref {{their_ref}}
+
+Dear {{email_salutation}},
+
+Thank you for your client's payment. Please find attached our letter and the completed Form LPE1, with our replies and the enclosures, in one PDF.
+
+Kind regards,
+
+{{director}}
+{{director_title}}, {{company}}

@@ -1,0 +1,305 @@
+{
+  "_comment": "TENANT CONFIG (not code): Example Court property data consumed by services/rtm_example_court.py. Overridable via MONGOOSE_RTM_PROPERTY_FILE; default <data_dir>/rtm/property.json. Values cross-validated against Service_Charge_Budget_FINAL_v9.xlsx + Example_Court_Demands_All_18_Flats.zip (June 2026). Figures in pounds; management module stores pence. Per-flat half_year_demand totals must sum to demand_pack_total (17685.24).",
+  "_meta": {
+    "tenant": "Example RTM Company Limited",
+    "schema": 1
+  },
+  "flats": [
+    {
+      "block": "1EC",
+      "flat": "1",
+      "surname": "Chandler",
+      "payment_reference": "BENNETT",
+      "half_year_demand": "1080.21",
+      "deed_note": "deed EX000001, Plot 1"
+    },
+    {
+      "block": "1EC",
+      "flat": "2",
+      "surname": "Dixon",
+      "payment_reference": "DIXON",
+      "half_year_demand": "792.17",
+      "deed_note": "stack pattern; deed missing"
+    },
+    {
+      "block": "1EC",
+      "flat": "3",
+      "surname": "Everett",
+      "payment_reference": "EVERETT",
+      "half_year_demand": "1075.16",
+      "deed_note": "deed EX000002, Plot 2"
+    },
+    {
+      "block": "1EC",
+      "flat": "4",
+      "surname": "Fletcher",
+      "payment_reference": "FLETCHER",
+      "half_year_demand": "1080.21",
+      "deed_note": "deed EX000003, Plot 3"
+    },
+    {
+      "block": "1EC",
+      "flat": "5",
+      "surname": "Gardener",
+      "payment_reference": "GARDENER",
+      "half_year_demand": "792.17",
+      "deed_note": "deed EX000004, Plot 4"
+    },
+    {
+      "block": "1EC",
+      "flat": "6",
+      "surname": "Hawkins",
+      "payment_reference": "HAWKINS",
+      "half_year_demand": "1075.16",
+      "deed_note": "deed EX000005, Plot 5"
+    },
+    {
+      "block": "1EC",
+      "flat": "7",
+      "surname": "Iverson",
+      "payment_reference": "IVERSON",
+      "half_year_demand": "1080.21",
+      "deed_note": "stack pattern; deed missing"
+    },
+    {
+      "block": "1EC",
+      "flat": "8",
+      "surname": "Jennings",
+      "payment_reference": "JENNINGS",
+      "half_year_demand": "792.17",
+      "deed_note": "deed EX000006, Plot 6"
+    },
+    {
+      "block": "1EC",
+      "flat": "9",
+      "surname": "Kingsley",
+      "payment_reference": "KINGSLEY",
+      "half_year_demand": "1075.16",
+      "deed_note": "deed EX000007, Plot 7"
+    },
+    {
+      "block": "3EC",
+      "flat": "1",
+      "surname": "Marsden",
+      "payment_reference": "MARSDEN",
+      "half_year_demand": "1075.16",
+      "deed_note": "stack-swap; verify deed"
+    },
+    {
+      "block": "3EC",
+      "flat": "2",
+      "surname": "Norton",
+      "payment_reference": "NORTON",
+      "half_year_demand": "792.17",
+      "deed_note": "stack-swap; verify deed"
+    },
+    {
+      "block": "3EC",
+      "flat": "3",
+      "surname": "Ashworth",
+      "payment_reference": "ASHWORTH",
+      "half_year_demand": "1080.21",
+      "deed_note": "stack-swap; verify deed"
+    },
+    {
+      "block": "3EC",
+      "flat": "4",
+      "surname": "Pemberton",
+      "payment_reference": "PEMBERTON",
+      "half_year_demand": "1075.16",
+      "deed_note": "Plot 1 deed verified"
+    },
+    {
+      "block": "3EC",
+      "flat": "5",
+      "surname": "Radcliffe",
+      "payment_reference": "RADCLIFFE",
+      "half_year_demand": "792.17",
+      "deed_note": "stack-swap; verify deed"
+    },
+    {
+      "block": "3EC",
+      "flat": "6",
+      "surname": "De Sinclair",
+      "payment_reference": "SINCLAIR",
+      "half_year_demand": "1080.21",
+      "deed_note": "stack-swap; verify deed"
+    },
+    {
+      "block": "3EC",
+      "flat": "7",
+      "surname": "Thornton",
+      "payment_reference": "THORNTON",
+      "half_year_demand": "1075.16",
+      "deed_note": "stack-swap; verify deed"
+    },
+    {
+      "block": "3EC",
+      "flat": "8",
+      "surname": "Underwood",
+      "payment_reference": "UNDERWOOD",
+      "half_year_demand": "792.17",
+      "deed_note": "stack-swap; verify deed"
+    },
+    {
+      "block": "3EC",
+      "flat": "9",
+      "surname": "Whitfield",
+      "payment_reference": "WHITFIELD",
+      "half_year_demand": "1080.21",
+      "deed_note": "stack-swap; verify deed"
+    }
+  ],
+  "budget": [
+    {
+      "label": "Buildings insurance",
+      "schedule": "sch1",
+      "annual": 6100.0
+    },
+    {
+      "label": "Directors' and officers' insurance",
+      "schedule": "sch1",
+      "annual": 270.0
+    },
+    {
+      "label": "Gutter cleaning",
+      "schedule": "sch1",
+      "annual": 860.0
+    },
+    {
+      "label": "Window cleaning",
+      "schedule": "sch1",
+      "annual": 390.0
+    },
+    {
+      "label": "Cleaning",
+      "schedule": "sch1",
+      "annual": 3640.0
+    },
+    {
+      "label": "Exterior wall cleaning",
+      "schedule": "sch1",
+      "annual": 960.0
+    },
+    {
+      "label": "Management and administration",
+      "schedule": "sch1",
+      "annual": 5780.0
+    },
+    {
+      "label": "Accounts fee",
+      "schedule": "sch1",
+      "annual": 540.0
+    },
+    {
+      "label": "Call routing and web portal",
+      "schedule": "sch1",
+      "annual": 130.0
+    },
+    {
+      "label": "Stationery and postage",
+      "schedule": "sch1",
+      "annual": 100.0
+    },
+    {
+      "label": "Fire risk assessment",
+      "schedule": "sch1",
+      "annual": 470.0
+    },
+    {
+      "label": "Emergency light testing",
+      "schedule": "sch1",
+      "annual": 540.0
+    },
+    {
+      "label": "Communal electricity",
+      "schedule": "sch1",
+      "annual": 1280.0
+    },
+    {
+      "label": "Entry phone maintenance",
+      "schedule": "sch1",
+      "annual": 270.0
+    },
+    {
+      "label": "Lift maintenance",
+      "schedule": "sch1",
+      "annual": 860.0
+    },
+    {
+      "label": "Lift telephone",
+      "schedule": "sch1",
+      "annual": 370.0
+    },
+    {
+      "label": "Lift engineering inspection",
+      "schedule": "sch1",
+      "annual": 1120.0
+    },
+    {
+      "label": "Lift engineering insurance",
+      "schedule": "sch1",
+      "annual": 160.0
+    },
+    {
+      "label": "Building condition survey",
+      "schedule": "sch1",
+      "annual": 1770.0
+    },
+    {
+      "label": "Reserve fund contribution",
+      "schedule": "sch1",
+      "annual": 4710.0
+    },
+    {
+      "label": "Gate maintenance",
+      "schedule": "sch2",
+      "annual": 640.0
+    },
+    {
+      "label": "Pump maintenance",
+      "schedule": "sch2",
+      "annual": 540.0
+    },
+    {
+      "label": "Undercroft clearout",
+      "schedule": "sch2",
+      "annual": 210.0
+    },
+    {
+      "label": "Steel caging for bike storage area",
+      "schedule": "sch2",
+      "annual": 3660.0
+    }
+  ],
+  "constants": {
+    "annual_budget": "35370.00",
+    "half_year_budget": "17685.00",
+    "demand_pack_total": "17685.24"
+  },
+  "company": {
+    "name": "Example RTM Company Limited",
+    "director": "Brian Bennett",
+    "director_title": "Director",
+    "tel": "020 7946 0000",
+    "motto": "A resident-led company for Example Court.",
+    "town": "Anytown",
+    "blocks": {
+      "1EC": {
+        "road": "1 Example Court",
+        "postcode": "EX1 1AB"
+      },
+      "3EC": {
+        "road": "3 Example Court",
+        "postcode": "EX1 2YN"
+      }
+    },
+    "bank": {
+      "name": "Sample Bank",
+      "sort_code": "00-00-00",
+      "account_number": "00000000",
+      "account_name": "Example RTM Company Limited"
+    },
+    "sign_name": "Sam"
+  }
+}

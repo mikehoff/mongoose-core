@@ -1,0 +1,16 @@
+To: {{recipient_email}}
+Subject: Service charge receipt. Flat {{flat_number}}, {{road}}
+
+Dear {{first_name}},
+
+Thank you for your payment. Please find attached your receipt confirming the half-year service charge of {{amount_received}} was received on {{received_date}} in full, with nothing outstanding on your account.
+
+No action needed. Just keep the receipt for your records.
+
+Best regards,
+
+{{sign_name}}
+
+{{director}}
+{{director_title}}, {{company}}
+Tel {{tel}} · info@example-court.org
